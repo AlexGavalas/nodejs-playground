@@ -1,38 +1,38 @@
 import fastify from 'fastify';
 import { z, ZodError } from 'zod';
-import fastifyWS from 'fastify-websocket';
+import fastifyWS from '@fastify/websocket';
 
 const User = z.object({
-	name: z.string().email('NOT EMAIL'),
+    name: z.string().email('NOT EMAIL'),
 });
 
-const app = fastify({ logger: true, disableRequestLogging: true });
+const app = fastify({ logger: true });
 
-app.register(fastifyWS);
+await app.register(fastifyWS);
 
 app.get('/', { websocket: true }, (connection) => {
-	connection.socket.on('message', (message) => {
-		console.log(message.toString());
-		connection.socket.send('hi from wildcard route');
-	});
+    connection.socket.on('message', (message) => {
+        console.log(message.toString());
+        connection.socket.send('hi from wildcard route');
+    });
 });
 
-app.post('/', async (request, reply) => {
-	try {
-		const data = User.parse(request.body);
-		console.log(data);
-	} catch (e) {
-		if (e instanceof ZodError) {
-			console.log(e.flatten());
-		}
-	}
+app.post('/', async (request) => {
+    try {
+        const data = User.parse(request.body);
+        console.log(data);
+    } catch (e) {
+        if (e instanceof ZodError) {
+            console.log(e.flatten());
+        }
+    }
 
-	return { hello: 'world' };
+    return { hello: 'world' };
 });
 
 try {
-	await app.listen(3001);
+    await app.listen({ port: 3001 });
 } catch (err) {
-	app.log.error(err);
-	process.exit(1);
+    app.log.error(err);
+    process.exit(1);
 }

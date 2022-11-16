@@ -7,7 +7,7 @@ test('top level test', async (t) => {
     // completes, it will cancel any outstanding subtests.
     await t.test('longer running subtest', async (t) => {
         return new Promise((resolve, reject) => {
-            setTimeout(resolve, 1000);
+            setTimeout(resolve, 100);
         });
     });
 });

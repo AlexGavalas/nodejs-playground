@@ -1,4 +1,4 @@
-import { Worker } from 'worker_threads';
+import { Worker } from 'node:worker_threads';
 import Fastify from 'fastify';
 
 const THREAD_COUNT = 4;
@@ -33,6 +33,6 @@ app.get('/blocking', async (_, reply) => {
     return `Count is ${count}`;
 });
 
-await app.listen(3000);
+await app.listen({ port: 3000 });
 
 console.log('App listening on port 3000');

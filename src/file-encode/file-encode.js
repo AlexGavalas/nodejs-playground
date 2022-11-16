@@ -1,8 +1,8 @@
 // * Encode file contents
 
-import fs from 'fs';
-import crypto from 'crypto';
-import { pipeline } from 'stream/promises';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { pipeline } from 'node:stream/promises';
 
 const hashStream = crypto.createHash('sha256').setEncoding('base64');
 const inputStream = fs.createReadStream('./lorem.txt');
