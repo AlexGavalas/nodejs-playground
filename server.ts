@@ -1,6 +1,10 @@
+#! /usr/bin/env node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm --watch
+
 import fastify from 'fastify';
 import { z, ZodError } from 'zod';
 import fastifyWS from '@fastify/websocket';
+
+import { logHey } from './util';
 
 const User = z.object({
     name: z.string().email('NOT EMAIL'),
@@ -31,6 +35,7 @@ app.post('/', async (request) => {
 });
 
 try {
+    logHey();
     await app.listen({ port: 3001 });
 } catch (err) {
     app.log.error(err);

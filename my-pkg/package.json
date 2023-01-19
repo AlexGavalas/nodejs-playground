@@ -1,0 +1,15 @@
+{
+    "name": "my-pkg",
+    "type": "module",
+    "main": "./dist/src/main.js",
+    "exports": {
+        "./*": "./dist/src/*"
+    },
+    "typesVersions": {
+        "*": {
+            "*": [
+                "dist/src/*"
+            ]
+        }
+    }
+}
