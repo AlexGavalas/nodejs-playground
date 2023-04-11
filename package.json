@@ -9,9 +9,10 @@
     },
     "scripts": {
         "dev": "NODE_NO_WARNINGS=1 node --watch --loader tsm server.ts",
-        "swc": "swc server.ts | node",
-        "swc:watch": "swc server.ts -w --out-dir dist",
-        "swc:dev": "nodemon --watch dist -e js ./dist/server.js",
+        "swc": "swc --quiet server.ts | node --loader=ts-node/esm --experimental-specifier-resolution=node --input-type=module",
+        "swc:watch": "swc *.ts -w --out-dir dist",
+        "swc:start:dev": "nodemon --watch dist -e js -x node --loader=ts-node/esm --experimental-specifier-resolution=node ./dist/server.js",
+        "swc:dev": "concurrently \"npm run swc:watch\" \"npm run swc:start:dev\"",
         "build": "node esbuild.js",
         "build:ts": "tsc",
         "rl": "node --experimental-import-meta-resolve src/read-line.js",
@@ -21,21 +22,22 @@
     },
     "devDependencies": {
         "@swc/cli": "0.1.62",
-        "@swc/core": "1.3.24",
-        "@types/node": "18.11.9",
-        "@types/ws": "8.5.3",
-        "esbuild": "0.15.14",
+        "@swc/core": "1.3.49",
+        "@types/node": "18.15.11",
+        "@types/ws": "8.5.4",
+        "concurrently": "8.0.1",
+        "esbuild": "0.17.16",
         "esbuild-register": "3.4.2",
-        "nodemon": "2.0.20",
+        "nodemon": "2.0.22",
         "ts-node": "10.9.1",
         "tsm": "2.3.0",
-        "typescript": "4.9.3",
-        "utap": "0.1.3",
-        "zod": "3.19.1"
+        "typescript": "5.0.4",
+        "utap": "0.2.0",
+        "zod": "3.21.4"
     },
     "dependencies": {
-        "@fastify/websocket": "7.1.1",
-        "fastify": "4.9.2",
+        "@fastify/websocket": "7.2.0",
+        "fastify": "4.15.0",
         "ramda": "0.29.0"
     }
 }
