@@ -9,9 +9,10 @@
     },
     "scripts": {
         "dev": "NODE_NO_WARNINGS=1 node --watch --loader tsm server.ts",
+        "start": "node --loader=ts-node/esm --experimental-specifier-resolution=node ./dist/server.js",
         "swc": "swc --quiet server.ts | node --loader=ts-node/esm --experimental-specifier-resolution=node --input-type=module",
         "swc:watch": "swc *.ts -w --out-dir dist",
-        "swc:start:dev": "nodemon --watch dist -e js -x node --loader=ts-node/esm --experimental-specifier-resolution=node ./dist/server.js",
+        "swc:start:dev": "nodemon --watch dist -e js -x npm start",
         "swc:dev": "concurrently \"npm run swc:watch\" \"npm run swc:start:dev\"",
         "build": "node esbuild.js",
         "build:ts": "tsc",
