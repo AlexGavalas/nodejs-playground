@@ -19,6 +19,15 @@ app.get('/', { websocket: true }, (connection) => {
     });
 });
 
+app.get('/data', () => ({ answer: 42 }));
+
+app.get('/hello', async (_request, reply) => {
+    const res = await fetch('http://localhost:3001/data');
+    const data = await res.json();
+
+    reply.send({ hello: 'world', data });
+});
+
 app.post('/', async (request) => {
     try {
         const data = User.parse(request.body);
