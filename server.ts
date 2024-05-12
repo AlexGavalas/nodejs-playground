@@ -1,5 +1,3 @@
-#! /usr/bin/env node --no-warnings --experimental-specifier-resolution=node --loader ts-node/esm --watch
-
 import fastify from 'fastify';
 import { z, ZodError } from 'zod';
 import fastifyWS from '@fastify/websocket';

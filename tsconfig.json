@@ -9,15 +9,5 @@
         "strict": true,
         "skipLibCheck": true,
         "outDir": "dist"
-    },
-    "include": ["./server.ts"],
-    "ts-node": {
-        "transpileOnly": true,
-        "transpiler": "ts-node/transpilers/swc",
-        "files": true,
-        "compilerOptions": {
-            "module": "esnext",
-            "isolatedModules": false
-        }
     }
 }
