@@ -17,8 +17,8 @@
         "start:tsup": "node ./dist/server.js",
         "build:tsc": "tsc",
         "start:tsc": "node --import=tsx ./dist/server.js",
-        "test": "node src/test.js | utap",
-        "test:ts": "node --import=tsx src/test.ts | utap"
+        "test": "node --test | utap",
+        "test:ts": "node --test --import=tsx | utap"
     },
     "devDependencies": {
         "@swc/cli": "0.1.62",
