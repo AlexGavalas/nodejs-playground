@@ -1,4 +1,5 @@
 import { parseArgs, styleText } from 'node:util';
+// @ts-expect-error
 import { glob, watch } from 'node:fs/promises';
 
 const { values } = parseArgs({
@@ -22,7 +23,10 @@ console.log(values);
 
 console.log(styleText(['green', 'underline'], 'some styled text'));
 
-// for await (const file of watch(`${import.meta.dirname}`)) {
 for await (const file of glob(`${import.meta.dirname}/*`)) {
+    console.log(file);
+}
+
+for await (const file of watch(`${import.meta.dirname}`)) {
     console.log(file);
 }
