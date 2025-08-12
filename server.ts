@@ -2,7 +2,7 @@ import fastify from 'fastify';
 import { z, ZodError } from 'zod';
 import fastifyWS from '@fastify/websocket';
 
-import { logHey } from './util';
+import { logHey } from './util.ts';
 
 const User = z.object({
     name: z.string().email('NOT EMAIL'),
@@ -13,9 +13,9 @@ const app = fastify({ logger: true });
 await app.register(fastifyWS);
 
 app.get('/', { websocket: true }, (connection) => {
-    connection.socket.on('message', (message) => {
+    connection.on('message', (message) => {
         console.log(message.toString());
-        connection.socket.send('hi from wildcard route');
+        connection.send('hi from wildcard route');
     });
 });
 
@@ -28,7 +28,7 @@ app.get('/hello', async (_request, reply) => {
     reply.send({ hello: 'world', data });
 });
 
-app.post('/', async (request) => {
+app.post('/', (request) => {
     try {
         const data = User.parse(request.body);
         console.log(data);

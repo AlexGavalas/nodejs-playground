@@ -1,5 +1,4 @@
 import { parseArgs, styleText } from 'node:util';
-// @ts-expect-error
 import { glob, watch } from 'node:fs/promises';
 
 const { values } = parseArgs({
